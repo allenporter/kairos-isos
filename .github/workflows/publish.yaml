@@ -57,7 +57,7 @@ jobs:
 
       - name: Rename ISO
         run: |-
-          ls -l -R ${GITHUB_WORKSPACE}/build
+          ls -l -R ${GITHUB_WORKSPACE}
           mv ${GITHUB_WORKSPACE}/build/kairos.iso.custom.iso \
             ${GITHUB_WORKSPACE}/build/kairos-${{ matrix.variant }}-${{ steps.meta.outputs.version }}.iso
 
