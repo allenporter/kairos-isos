@@ -13,8 +13,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_BASE: ${{ github.repository_owner }}
-  # renovate: datasource=github-releases depName=kairos-io/AuroraBoot
-  AURORABOOT_VERSION: 0.2.7
 
 jobs:
   build:
@@ -59,12 +57,12 @@ jobs:
 
       - name: Rename ISO
         run: |-
-          mv ./build/kairos.iso.custom.iso \
-            kairos-${{ matrix.variant }}-${{ steps.meta.outputs.version }}.iso
+          mv ${GITHUB_WORKSPACE}/build/kairos.iso.custom.iso \
+            ${GITHUB_WORKSPACE}/build/kairos-${{ matrix.variant }}-${{ steps.meta.outputs.version }}.iso
 
       - name: Publish ISO
         uses: softprops/action-gh-release@v1
         id: publish-iso
         if: ${{ github.event_name != 'pull_request' }}
         with:
-          files: kairos-${{ matrix.variant }}-${{ steps.meta.outputs.version }}.iso
+          files: ${GITHUB_WORKSPACE}/build/kairos-${{ matrix.variant }}-${{ steps.meta.outputs.version }}.iso
