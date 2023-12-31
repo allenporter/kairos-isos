@@ -1,0 +1,3 @@
+container_image: ghcr.io/allenporter/kairos-ubuntu-intel-nuc:v0.1.0
+disable_http_server: true
+disable_netboot: true
