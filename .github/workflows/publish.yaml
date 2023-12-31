@@ -53,6 +53,7 @@ jobs:
       - name: Build iso from the container image
         id: build-iso
         uses: docker://quay.io/kairos/auroraboot:v0.2.7
+        pre-entrypoint: 'chmod go+rx /github/workspace/build'
         with:
           args: >-
             --set "state_dir=/github/workspace"
@@ -61,7 +62,6 @@ jobs:
 
       - name: Rename ISO
         run: |-
-          ls -l -R ${GITHUB_WORKSPACE}
           mv ${GITHUB_WORKSPACE}/build/kairos.iso.custom.iso \
             ${GITHUB_WORKSPACE}/build/kairos-${{ matrix.variant }}-${{ steps.meta.outputs.version }}.iso
 
